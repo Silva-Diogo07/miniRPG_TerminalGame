@@ -1,19 +1,57 @@
-from Characters.character import Character
+import time
+import random
 
-player = Character("Player", 100, 200, "Melee")
+from Characters.character import Character
+from utilities import clear_console
+
+player = Character("Player", 100, 10, "Melee")
 enemy = Character("Enemy", 75, 20, "Axe")
 
-while player.hp > 0 and enemy.hp > 0:
+def main():
 
-    print(f"{player.name} attacked {enemy.name}")
-    player.attack(enemy)
+    clear_console()
 
-    if enemy.hp > 0:
-        print(f"{enemy.name} attacked {player.name}")
-        enemy.attack(player)  
+    print("Welcome to RPG console mini game")
 
+    time.sleep(1.5)
 
-if player.hp <= 0:
-    print("Player died")
-else:
-    print("Enemy died")
+    clear_console()
+
+    print("First to attack will be ...")
+
+    time.sleep(1.25)
+
+    attacker = random.choice([player, enemy])
+
+    clear_console()
+
+    print(attacker.name)
+    time.sleep(1)
+
+    defender = enemy if attacker == player else player
+
+    clear_console()
+
+    while player.hp > 0 and enemy.hp > 0:
+
+        attacker.attack(defender)
+
+        print(f"{attacker.name} attacked {defender.name}")
+        print(f"{defender.name} HP remaining: {defender.hp}")
+
+        attacker, defender = defender, attacker
+
+        time.sleep(1)
+        clear_console()
+
+    if player.hp <= 0:
+        print("Enemy won")
+        time.sleep(1)
+        return 0
+    else:
+        print("Player won")
+        time.sleep(1)
+        return 0    
+
+if __name__ == "__main__":
+    main()
