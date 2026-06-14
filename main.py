@@ -12,13 +12,11 @@ def main():
     clear_console()
 
     print("Welcome to RPG console mini game")
-
     time.sleep(1.5)
 
     clear_console()
 
     print("First to attack will be ...")
-
     time.sleep(1.25)
 
     attacker = random.choice([player, enemy])
@@ -33,18 +31,9 @@ def main():
     clear_console()
 
     while player.hp > 0 and enemy.hp > 0:
-
-        # todo : implement dodge in the Character class instead of locally
-
-        dodged = random.choice([True, False])
-
-        if dodged:
-            print(f"{defender.name} dodged the attack!")
-        else:
-            attacker.attack(defender)
-            print(f"{attacker.name} attacked {defender.name}")
-        
-        print(f"{defender.name} HP remaining: {defender.hp}")
+        print(f"{attacker.name} is attacking {defender.name}...")
+        attack_result = attacker.attack(defender)
+        print(attack_result)
 
         attacker, defender = defender, attacker
 
