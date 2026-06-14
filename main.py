@@ -34,14 +34,21 @@ def main():
 
     while player.hp > 0 and enemy.hp > 0:
 
-        attacker.attack(defender)
+        # todo : implement dodge in the Character class instead of locally
 
-        print(f"{attacker.name} attacked {defender.name}")
+        dodged = random.choice([True, False])
+
+        if dodged:
+            print(f"{defender.name} dodged the attack!")
+        else:
+            attacker.attack(defender)
+            print(f"{attacker.name} attacked {defender.name}")
+        
         print(f"{defender.name} HP remaining: {defender.hp}")
 
         attacker, defender = defender, attacker
 
-        time.sleep(1)
+        time.sleep(1.5)
         clear_console()
 
     if player.hp <= 0:
