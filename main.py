@@ -51,3 +51,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
+
+# TODO: Implement player action system (attack / focus)
+# Focus increases dodge chance by +20% for the next incoming attack only
+# create is_alive function to use in the main loop
