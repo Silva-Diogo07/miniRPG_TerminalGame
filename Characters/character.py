@@ -17,7 +17,7 @@ class Character:
         return f"{self.name} has {self.hp} HP left"
     
     def dodge(self):
-        return random.choice([True, False])
+        return random.random() < 0.3
     
 
     def attack(self, target):
