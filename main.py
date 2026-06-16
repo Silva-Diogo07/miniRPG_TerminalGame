@@ -2,11 +2,12 @@ import time
 import random
 
 from Characters.character import Character
+from Characters.player import Player
 from input import get_action
 from utilities import clear_console
 
-player = Character("Player", 100, 10, "Melee")
-enemy = Character("Enemy", 75, 20, "Axe")
+player = Player("Player", 100, 10, "Melee", 30)
+enemy = Character("Enemy", 75, 20, "Axe", 30)
 
 def main():
 
@@ -33,10 +34,9 @@ def main():
 
     while player.hp > 0 and enemy.hp > 0:
 
-        # verify if player is attacker
-        # check player action
-
         if attacker is player:
+            player.reset_dodge_chance()
+
             player_action = get_action()
 
             if player_action == 1:
