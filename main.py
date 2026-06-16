@@ -47,7 +47,7 @@ def main():
     else:
         print("Player won")
         time.sleep(1)
-        return 0    
+        return 0
 
 if __name__ == "__main__":
     main()
