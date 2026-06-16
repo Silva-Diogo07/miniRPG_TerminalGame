@@ -1,11 +1,10 @@
 def get_action():
-    print("1 - Attack")
-    print("2 - Focus")
-
-    option = int(input())
 
     while True:
         try:
+            print("1 - Attack")
+            print("2 - Focus")
+
             option = int(input("Choose an option: "))
             
             if option in (1, 2):

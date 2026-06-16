@@ -2,6 +2,7 @@ import time
 import random
 
 from Characters.character import Character
+from input import get_action
 from utilities import clear_console
 
 player = Character("Player", 100, 10, "Melee")
@@ -31,14 +32,30 @@ def main():
     clear_console()
 
     while player.hp > 0 and enemy.hp > 0:
-        print(f"{attacker.name} is attacking {defender.name}...")
-        attack_result = attacker.attack(defender)
-        print(attack_result)
+
+        # verify if player is attacker
+        # check player action
+
+        if attacker is player:
+            player_action = get_action()
+
+            if player_action == 1:
+                print(f"{attacker.name} attacked {defender.name}")
+                print(attacker.attack(defender))
+
+            elif player_action == 2:
+                print(f"{attacker.name} is focused...")
+                attacker.focus()
+        
+        else:
+            print(f"{attacker.name} attacked {defender.name}")
+            print(attacker.attack(defender))
 
         attacker, defender = defender, attacker
 
         time.sleep(1.5)
         clear_console()
+
 
     if player.hp <= 0:
         print("Enemy won")
