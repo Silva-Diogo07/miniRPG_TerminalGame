@@ -1,0 +1,6 @@
+- Improve focus feedback by showing dodge chance increase when the player chooses Focus
+- Verify dodge logic and clarify whether dodge reset should happen before or after the next turn
+- Add EOFError handling in input.py so Ctrl+D/Ctrl+Z does not crash the game
+- Remove or implement Characters/enemy.py since the file is currently empty
+- Improve game messages with clearer hit/dodge feedback and current HP status after each action
+- Consider refactoring main.py to avoid global player/enemy variables and make turn flow more modular
