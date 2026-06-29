@@ -1,75 +1,63 @@
-import time
 import random
 
-from Characters.character import Character
+from Characters.enemy import Enemy
 from Characters.player import Player
-from input import get_action
-from utilities import clear_console
-
-player = Player("Player", 100, 10, "Melee", 30)
-enemy = Character("Enemy", 75, 20, "Axe", 30)
+from inputs import get_player_name
+from utilities import *
 
 def main():
+    
+    player = Player()
+    enemy = Enemy.create_random_enemy()
 
     clear_console()
 
-    print("Welcome to RPG console mini game")
-    time.sleep(1.5)
+    print("Welcome to my RPG game")
+    pause(1.25)
 
     clear_console()
 
-    print("First to attack will be ...")
-    time.sleep(1.25)
+    player.name = get_player_name()
+    print(f"Welcome {player.name}")
+
+    pause(1.25)
+    clear_console()
+    print(f"Debug: enemy spawned is {enemy.name}")
+    pause(2.5)
 
     attacker = random.choice([player, enemy])
 
-    clear_console()
+    print(f"First to attack will be: {attacker.name} (player)")
+    pause(1)
 
-    print(attacker.name)
-    time.sleep(1)
-
-    defender = enemy if attacker == player else player
+    defender = enemy if attacker is player else player
 
     clear_console()
 
-    while player.hp > 0 and enemy.hp > 0:
-
-        if attacker is player:
-            player.reset_dodge_chance()
-
-            player_action = get_action()
-
-            if player_action == 1:
-                print(f"{attacker.name} attacked {defender.name}")
-                print(attacker.attack(defender))
-
-            elif player_action == 2:
-                print(f"{attacker.name} is focused...")
-                attacker.focus()
+    # game loop
+    while player.is_alive() and enemy.is_alive():
         
-        else:
-            print(f"{attacker.name} attacked {defender.name}")
-            print(attacker.attack(defender))
+        attack_result = attacker.attack(defender)
+        print(attack_result)
 
         attacker, defender = defender, attacker
 
-        time.sleep(1.5)
+        pause(2.5)
         clear_console()
 
-
-    if player.hp <= 0:
+    
+    if not player.is_alive():
         print("Enemy won")
-        time.sleep(1)
-        return 0
     else:
         print("Player won")
-        time.sleep(1)
-        return 0
+    
+    pause(1.5)
+    return
+
 
 if __name__ == "__main__":
-    main()
-    
+    try:
+        main()
 
-# TODO: Implement player action system (attack / focus)
-# Focus increases dodge chance by +20% for the next incoming attack only
-# create is_alive function to use in the main loop
+    except KeyboardInterrupt:
+        print("\nGame closed by user.")

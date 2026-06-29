@@ -1,15 +1,18 @@
 import random
 
 class Character:
-    def __init__(self, name, hp, damage, weapon, dodge):
+    def __init__(self, name, hp, damage, weapon, agility):
         self.name = name
         self.hp = hp
         self.damage = damage
         self.weapon = weapon
-        self.dodge = dodge
+        self.agility = agility
 
-    def take_damage(self, amount):
-        self.hp -= amount
+    def is_alive(self):
+        return self.hp > 0
+
+    def take_damage(self, damage_amount):
+        self.hp -= damage_amount
 
         if self.hp <= 0:
             self.hp = 0
@@ -18,13 +21,13 @@ class Character:
         return f"{self.name} has {self.hp} HP left"
     
     def dodged(self):
-        # if number <= 30 then attacked was dodge , else attack not dodge
-        return random.randint(1, 100) <= self.dodge
+        # if number <= agility , then attacked was dodge , else attack not dodge
+        return random.randint(1, 100) <= self.agility
     
 
     def attack(self, target):
         if target.dodged():
-            return f"{target.name} dodged {self.name}'s attack!"
+            return f"{target.name} dodged {self.name}'s attack"
         
-        damage_result = target.take_damage(self.damage)
-        return f"{self.name} hits {target.name} for {self.damage} damage. {damage_result}"
+        print(f"{self.name} dealt {self.damage} damage to {target.name}")
+        return target.take_damage(self.damage)
