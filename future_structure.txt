@@ -1,0 +1,22 @@
+project/
+│
+├── main.py
+├── game.py              # manages the game
+├── battle.py            # combat system
+├── inputs.py 
+├── utilities.py
+│
+├── Characters/
+│   ├── player.py
+│   ├── enemy.py
+│   ├── npc.py           # future feature | initially will give hints for something (idk what yet)
+│   └── character.py
+│
+├── Items/
+│   ├── weapon.py
+│   ├── armor.py
+│   └── potion.py
+│
+└── Maps/
+    ├── map1.py
+    └── map2.py
