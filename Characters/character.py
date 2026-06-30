@@ -1,12 +1,13 @@
 import random
 
 class Character:
-    def __init__(self, name, hp, damage, weapon, agility):
+    def __init__(self, name, hp, damage, weapon, agility, stamina):
         self.name = name
         self.hp = hp
         self.damage = damage
         self.weapon = weapon
         self.agility = agility
+        self.stamina = stamina
 
     def is_alive(self):
         return self.hp > 0
