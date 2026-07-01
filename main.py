@@ -1,15 +1,14 @@
 from Characters.enemy import Enemy
 from Characters.player import Player
 from inputs import get_player_name
-from utilities import *
+from utilities import clear_console, pause, print_section, show_battle_status, welcome_game_message, welcome_player, play_game
+
 
 def main():
-    
     player = Player()
     enemy = Enemy.create_random_enemy()
 
     clear_console()
-
     welcome_game_message()
 
     clear_console()
@@ -20,23 +19,12 @@ def main():
 
     clear_console()
 
-    attacker = get_first_attacker(player, enemy)
-    defender = enemy if attacker is player else player
-
+    print_section(f"Battle Start: {player.name} vs {enemy.name}")
+    show_battle_status(player, enemy)
+    pause(1.5)
     clear_console()
 
-    # game loop
-    while player.is_alive() and enemy.is_alive():
-        
-        attack_result = attacker.attack(defender)
-        print(attack_result)
-
-        attacker, defender = defender, attacker
-
-        pause(2.5)
-        clear_console()
-
-    check_winner(player)
+    play_game(player, enemy)
 
 
 if __name__ == "__main__":
